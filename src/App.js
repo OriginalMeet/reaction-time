@@ -1,22 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
 
+// Hit space as soon as the color changes to red
 function App() {
+  // data for the application
+  const [begin, setFlag] = useState(false);
+
+  const renderButton = () => {
+    if(!begin) {
+      return <button onClick={() => setFlag(true)}>Begin The Test</button>
+    } else {
+
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h>Reaction Time Test</h>
+        {renderButton()}
       </header>
     </div>
   );
