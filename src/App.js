@@ -1,45 +1,46 @@
 import './App.css';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-// Hit space as soon as the color changes to red
 function App() {
-  // data for the application
   const [begin, setFlag] = useState(false);
   const [color, setColor] = useState("red");
-  const [randomNumber, setRandomNumber] = useState(Math.random() * 5);
+  const [randomNumber, setRandomNumber] = useState(Math.random() * 10);
   const [start, setStart] = useState();
+  const [text, setText] = useState(<h>Begin the Test.<br></br><br></br> Click ASAP the Screen Color Changes to Green.</h>);
 
   const beginTest = () => {
     setFlag(true);
+    setText("Ready...");
     setTimeout(() => {
       setColor("green")
       setStart(new Date());
-      setRandomNumber(Math.random() * 5);
+      setRandomNumber(Math.random() * 10);
+      setText("Click!");
     }, randomNumber*1000)
   }
 
   const endTest = () => {
-    // calculate the time when user clicks the end button
     if(color === "red") {
-      alert("You have to start the test first!");
+      setText(<h>Clicked too early, wait for the green color.</h>);
     } else {
-      alert("Congratulations! You clicked the button in " + Math.abs(start - new Date()) + " ms")
+      setText(<h>You clicked the button in {Math.abs(start - new Date())} ms!<br></br><br></br> Refresh the Page to Start Again.</h>)
     }
   }
 
   const renderButton = () => {
     if(!begin) {
-      return <button onClick={() => beginTest()}>Begin The Test</button>
+      return <div className="color purple" onClick={() => beginTest()}>{text}</div>
     } else {
-      return (color === "red" ? <div class="color red" onClick={endTest}>Red</div> : <div class="color green" onClick={endTest}>Green</div>)
+      return (color === "red" ? <div className="color red" onClick={endTest}>{text}</div> : <div className="color green" onClick={endTest}>{text}</div>)
     }
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <h2>Reaction Time Test</h2>
-        <h5>Click ASAP when the Color changes to Green</h5>
+        <div className="inline">
+          <span>Reaction Time Test</span>
+        </div>
         {renderButton()}
       </header>
     </div>
