@@ -4,7 +4,7 @@ import { useState } from 'react';
 function App() {
   const [begin, setFlag] = useState(false);
   const [color, setColor] = useState("red");
-  const [randomNumber, setRandomNumber] = useState(Math.random() * 10);
+  const [randomNumber, setRandomNumber] = useState(Math.random() * 6);
   const [start, setStart] = useState();
   const [text, setText] = useState(<h>Begin the Test.<br></br><br></br> Click ASAP the Screen Color Changes to Green.</h>);
 
@@ -14,7 +14,7 @@ function App() {
     setTimeout(() => {
       setColor("green")
       setStart(new Date());
-      setRandomNumber(Math.random() * 10);
+      setRandomNumber(Math.random() * 6);
       setText("Click!");
     }, randomNumber*1000)
   }
